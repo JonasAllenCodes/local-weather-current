@@ -1,0 +1,84 @@
+<!doctype html>
+<html class="no-js" lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Local Weather</title>
+    <link rel="stylesheet" href="css/foundation.css">
+    <link rel="stylesheet" href="css/app.css">
+  </head>
+  <body>
+    <div id="content-container" class="row expanded small-collapse" data-equalizer>
+      <div id="current-weather" class="medium-6 small-12 columns text-center" data-equalizer-watch>
+        <div id="current-weather-cell">
+          <div id="current-weather-container">
+            <ul>
+            <li class="location"></li>
+            <li class="lookup-time"></li>
+            </ul>
+            <div id="current-icon-temp" class="icon-temp">
+              <canvas id="current-icon" class="weather-icon" width="128" height="128"></canvas>
+              <span id="current-temp" class="weather-temp"></span>
+            </div>
+            <div id="current-summary" class="weather-summary"></div>
+            <button id="impe-metr-switch" class="button">
+              &#176;F | &#176;C
+            </button>
+            <div class="row">
+              <div class="">
+                <ul id="current-info" class="row">
+                  <li class="small-6 columns"><strong>Wind</strong> <br><span id="current-wind"></span></li>
+                  <li class="small-6 columns"><strong>Feels Like</strong><br><span id="current-feels-like"></span></li>
+                  <li class="small-6 columns"><strong>Chance of <span class="current-precip-type">rain</span></strong><br><span id="current-precip-chance"></span></li>
+                  <li class="small-6 columns"><strong>Amount of <span class="current-precip-type">rain</span></strong><br><span id="current-precip-amount"></span></li>
+                  <li class="small-6 columns"><strong>Humidity</strong><br><span id="current-humidity"></span></li>
+                  <li class="small-6 columns"><strong>Dew Pt</strong><br><span id="current-dew-point"></span></li>
+                  <li class="small-6 columns"><strong>Visibility</strong><br><span id="current-visibility"></span></li>
+                  <li class="small-6 columns"><strong>Pressure</strong><br><span id="current-pressure"></span></li>
+                  <li class="small-6 columns"><strong>Sunrise</strong><br><span id="current-sunrise"></span></li>
+                  <li class="small-6 columns"><strong>Sunset</strong><br><span id="current-sunset"></span></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="future-weather" class="medium-6 small-12 columns" data-equalizer-watch>
+        <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true">
+          <!-- <li class="accordion-item is-active" data-accordion-item>
+            <a href="#" class="accordion-title">Weather Maps</a>
+            <div id="weather-maps" class="accordion-content" data-tab-content>
+              <script src='https://maps.darksky.net/@temperature,39.000,-95.000,4.js?embed=true&timeControl=true&fieldControl=true&defaultField=temperature&defaultUnits=_f'></script>
+            </div>
+          </li> -->
+          <li id="hourly-weather-tab" class="accordion-item is-active" data-accordion-item>
+            <a href="#" class="accordion-title">Hourly Weather</a>
+            <div id="daily-weather" class="accordion-content" data-tab-content>
+              <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true">
+                <li id="hourly-weather-tab" class="accordion-item is-active" data-accordion-item>
+                  <a href="#" class="accordion-title">Hourly Weather</a>
+                  <div id="daily-weather" class="accordion-content" data-tab-content>
+                    
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li id="daily-weather-tab" class="accordion-item" data-accordion-item>
+            <a href="#" class="accordion-title">Daily Weather</a>
+            <div id="daily-weather" class="accordion-content" data-tab-content>
+              
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <script src="js/vendor/jquery.js"></script>
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/vendor/skycons.js"></script>
+    <script src="js/app.js"></script>
+  </body>
+</html>
