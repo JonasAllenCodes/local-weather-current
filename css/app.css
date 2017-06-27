@@ -7,6 +7,11 @@
 	background-position: center center;
 	display: table;
 }
+@media screen and (min-width: 40em;) {
+	#current-weather {
+		position: fixed;
+	}
+}
 #current-weather #current-weather-cell {
 	display: table-cell;
 	text-align: center;

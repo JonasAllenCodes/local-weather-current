@@ -29,7 +29,7 @@ $(document).ready(function() {
 	// Set current weather to height of window
 	function setCurrentHeight() {
     windowHeight = $(window).innerHeight();
-    $('#current-weather').css('min-height', windowHeight);
+    $('#current-weather').css('max-height', windowHeight);
   };
   setCurrentHeight();
   
@@ -389,13 +389,12 @@ $(document).ready(function() {
 					darksky.skycons.set("hourly-icon", Skycons[hourlyPosition.icon.toUpperCase().replace(/-/g, "_")]);
 					$("#hourly-summary").html(hourlyPosition.summary);
 
-					//$(hourly-icon)
-
 					console.log(hourlyIndex[0]);
 
 					for(var i = 0; hourlyIndex.length > i; i++) {
 						var thisHour = convertTime(hourlyWeather("time", i), "hour", false);
 						var thisHourFormated = convertTime(hourlyWeather("time", i), "hour");
+						var thisSummary = hourlyWeather("summary", i);
 						var thisTemp = setTemp(hourlyWeather, "temperature", i);
 						var thisWind = setWind(hourlyWeather, i);
 						var thisFeelsLike = setTemp(hourlyWeather, "apparentTemperature", i);
@@ -413,6 +412,35 @@ $(document).ready(function() {
 							setVisibility(hourlyWeather, i);
 						var thisPressure = 
 							setPressure(hourlyWeather, i);
+
+						$("#hourly-weather-list").append(
+							'<li id="hour-' +  i +
+							'-weather" class="accordion-item" data-accordion-item></li>'
+						);
+						$("#hour-" + i + "-weather").html(
+							'<a href="#" id="hour-' + i +
+							'-title" class="accordion-title hour-title"></a>'
+						);
+						$("#hour-" + i + "-title").append(
+							thisHourFormated
+						);
+						$("#hour-" + i + "-title").append(
+							'<canvas id="hour-' + i +
+							'-icon" class="weather-icon" width="40" height="40"></canvas>' + thisSummary
+
+						);
+						setSkycon(
+							"hour-"+i+"-icon", hourlyWeather, i
+						);
+						$("#hour-" + i + "-title").append(
+							thisTemp
+						);
+						$("#hour-" + i + "-weather").append(
+							'<div id="hour-' + i +
+							'-content" class="accordion-content" data-tab-content>' + 
+							'</div>'
+						);
+						$("#hour-" + i + "content").append();
 
 						console.log();
 					}
