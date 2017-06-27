@@ -383,8 +383,16 @@ $(document).ready(function() {
 				}
 
 				function buildHourly() {
-					var hourlyIndex = darksky.weather.hourly.data;
+					var hourlyPosition = darksky.weather.hourly
+					var hourlyIndex = hourlyPosition.data;
+
+					darksky.skycons.set("hourly-icon", Skycons[hourlyPosition.icon.toUpperCase().replace(/-/g, "_")]);
+					$("#hourly-summary").html(hourlyPosition.summary);
+
+					//$(hourly-icon)
+
 					console.log(hourlyIndex[0]);
+
 					for(var i = 0; hourlyIndex.length > i; i++) {
 						var thisHour = convertTime(hourlyWeather("time", i), "hour", false);
 						var thisHourFormated = convertTime(hourlyWeather("time", i), "hour");
