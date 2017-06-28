@@ -413,34 +413,63 @@ $(document).ready(function() {
 						var thisPressure = 
 							setPressure(hourlyWeather, i);
 
+						function setStat(title, stat) {
+							return '<li class="small-6 columns"><strong>' + title +
+								'</strong> <br><span id="current-wind">' + stat +
+								'</span></li>';
+						}
+
 						$("#hourly-weather-list").append(
 							'<li id="hour-' +  i +
-							'-weather" class="accordion-item" data-accordion-item></li>'
+							'-weather" class="accordion-item hour-weather" data-accordion-item></li>'
 						);
 						$("#hour-" + i + "-weather").html(
 							'<a href="#" id="hour-' + i +
-							'-title" class="accordion-title hour-title"></a>'
+							'-title" class="accordion-title hour-title text-center"></a>'
 						);
 						$("#hour-" + i + "-title").append(
-							thisHourFormated
+							'<span class="float-left">' + thisHourFormated + '</span>'
 						);
 						$("#hour-" + i + "-title").append(
-							'<canvas id="hour-' + i +
-							'-icon" class="weather-icon" width="40" height="40"></canvas>' + thisSummary
+							'<span class="text-center"><canvas id="hour-' + i +
+							'-icon" class="weather-icon hourly-icon" width="40" height="40"></canvas>' + thisSummary + '</span>'
 
 						);
 						setSkycon(
 							"hour-"+i+"-icon", hourlyWeather, i
 						);
 						$("#hour-" + i + "-title").append(
-							thisTemp
+							'<span class="float-right">' + thisTemp + '</span>'
 						);
 						$("#hour-" + i + "-weather").append(
 							'<div id="hour-' + i +
-							'-content" class="accordion-content" data-tab-content>' + 
+							'-content" class="accordion-content hour-content" data-tab-content>' + 
 							'</div>'
 						);
-						$("#hour-" + i + "content").append();
+						$("#hour-" + i + "-content").append('<ul id="hour-' + i +
+							'-info" class="row hour-info text-center"></ul>');
+						$("#hour-" + i + "-info").append(setStat("Wind", thisWind));
+						$("#hour-" + i + "-info").append(setStat(
+							"Feels Like", thisFeelsLike
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Chance of " + thisPrecipType, thisPrecipChance
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Amount of " + thisPrecipType, thisPercipAmount
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Humidity", thisHumidity
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Dew Pt", thisDewPoint
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Visibility", thisVisibility
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Pressure", thisPressure
+						));
 
 						console.log();
 					}

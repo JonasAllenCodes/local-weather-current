@@ -1,6 +1,10 @@
 #content-container {
 
 }
+.hour-content {
+	display: block;
+}
+
 #current-weather {
 	background-size:     cover;                      /* <------ */
 	background-repeat:   no-repeat;
@@ -56,4 +60,7 @@
 }
 #current-weather #current-info .celc-fahr {
 	font-size: 0.7rem;
+}
+.hour-content ul li {
+	list-style-type: none;
 }
