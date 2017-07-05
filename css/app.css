@@ -1,9 +1,9 @@
 #content-container {
 
 }
-.hour-content {
+/* .hour-content {
 	display: block;
-}
+} */
 
 #current-weather {
 	background-size:     cover;                      /* <------ */
@@ -61,6 +61,30 @@
 #current-weather #current-info .celc-fahr {
 	font-size: 0.7rem;
 }
+#hourly-summary {
+	margin-bottom: 1rem;
+}
+.hour-title {
+	font-weight: bolder;
+	font-size: 1.5rem;
+	color:black;
+}
+.hour-title:hover,
+.hour-title:focus {
+	color: black;
+}
+.hour-title:before {
+	display: none;
+}
+.hour-title .text-center {
+	font-weight: normal;
+}
+.hour-title .float-right .celc-fahr {
+	font-size: 0.8rem;
+}
 .hour-content ul li {
 	list-style-type: none;
+}
+.hour-content .celc-fahr {
+	font-size: 0.7rem;
 }

@@ -1,6 +1,5 @@
 $(document).foundation();
 
-
 // User Info and Location
 var user = {
 	location: {},
@@ -160,7 +159,7 @@ $(document).ready(function() {
 				  	hour = hour - 12;
 				  	//if 
 				  } if(hour < 10 && formatTF) {
-				  	hour = " " + hour;
+				  	hour = "&nbsp;&nbsp;" + hour;
 				  }
 
 				  var full = month + ' ' + day + ' ' + year + ' ' + hour +
@@ -210,12 +209,12 @@ $(document).ready(function() {
 				function checkKmhMph(speed) {
 					switch(user.kmhMph) {
 						case "mph":
-							return Math.round(speed) + " mph";
+							return Math.round(speed) + " mph ";
 							break;
 
 						case "km/h":
 							speed = speed * 1.60934;
-							return Math.round(speed) + " km/h";
+							return Math.round(speed) + " km/h ";
 							break;
 					}
 				}
@@ -251,50 +250,50 @@ $(document).ready(function() {
 
 					switch(weather) {
 						case "clear-day":
-							backgroundIMG = 'url("/img/clear-day-large.jpg")';
+							backgroundIMG = 'url("img/clear-day-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							break;
 						case "clear-night":
-							backgroundIMG = 'url("/img/clear-night-large.jpg")';
+							backgroundIMG = 'url("img/clear-night-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.65)");
 							break;
 						case "rain":
-							backgroundIMG = 'url("/img/rain-day-large.jpg")';
+							backgroundIMG = 'url("img/rain-day-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.7)");
 							break;
 						case "snow":
-							backgroundIMG = 'url("/img/snow-day-large.jpg")';
+							backgroundIMG = 'url("img/snow-day-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.85)");
 							break;
 						case "sleet":
-							backgroundIMG = 'url("/img/sleet-large.jpg")';
+							backgroundIMG = 'url("img/sleet-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							break;
 						case "wind":
-							backgroundIMG = 'url("/img/wind-large-1.jpg")';
+							backgroundIMG = 'url("img/wind-large-1.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.85)");
 							break;
 						case "fog":
-							backgroundIMG = 'url("/img/fog-day-large.jpg")';
+							backgroundIMG = 'url("img/fog-day-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.5)");
 							break;
 						case "cloudy":
-							backgroundIMG = 'url("/img/cloudy-large.jpg")';
+							backgroundIMG = 'url("img/cloudy-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.5)");
 							break;
 						case "partly-cloudy-day":
-							backgroundIMG = 'url("/img/partly-cloudy-day-large.jpg")';
+							backgroundIMG = 'url("img/partly-cloudy-day-large.jpg")';
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.8)");
 							break;
 						case "partly-cloudy-night":
-							backgroundIMG = 'url("/img/partly-cloudy-night-large-1.jpg")';
+							backgroundIMG = 'url("img/partly-cloudy-night-large-1.jpg")';
 							//objectDOM.css("background-position", "bottom right");
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.4)");
@@ -333,13 +332,13 @@ $(document).ready(function() {
 				}
 
 				function setWind(functionID, arrayID) {
-					var speed = checkKmhMph(functionID("windSpeed", arrayID));
+					var speed = checkKmhMph(functionID("windSpeed", arrayID)) + " ";
 					var bearing = functionID("windBearing", arrayID) + "deg";
 					var result = speed +
 						' <span class="direction" style="display: inline-block; -ms-transform: rotate(' +
 							bearing + '); -webkit-transform: rotate(' +
 							bearing + '); transform: rotate(' + bearing +
-							');">&uarr;</span>';
+							');"> &uarr; </span> ';
 
 					return result;
 				}
@@ -432,7 +431,7 @@ $(document).ready(function() {
 						);
 						$("#hour-" + i + "-title").append(
 							'<span class="text-center"><canvas id="hour-' + i +
-							'-icon" class="weather-icon hourly-icon" width="40" height="40"></canvas>' + thisSummary + '</span>'
+							'-icon" class="weather-icon hourly-icon" width="20" height="20"></canvas> ' + thisSummary + '</span>'
 
 						);
 						setSkycon(
@@ -470,6 +469,26 @@ $(document).ready(function() {
 						$("#hour-" + i + "-info").append(setStat(
 							"Pressure", thisPressure
 						));
+
+						$("#hour-" + i + "-title").on("click", function() {
+							var hourTitle = $("#hour-" + i + "-title");
+							var hourContent = hourTitle.siblings(
+								"#hour-" + i + "-content"
+							);
+
+							function hourContentDisplay(prop) {
+								return hourContent.css("display", prop);
+							}
+
+							switch(hourContentDisplay) {
+								case "block":
+									hourContentDisplay("none");
+									break;
+								case "none":
+									hourContentDisplay("block");
+									break;
+							}
+						});
 
 						console.log();
 					}
