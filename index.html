@@ -46,6 +46,7 @@
           <li id="hourly-weather-tab" class="accordion-item is-active" data-accordion-item>
             <a href="#" class="accordion-title">Hourly Weather</a>
             <div id="hourly-weather-content" class="accordion-content" data-tab-content>
+
               <div class="text-center">
                 <canvas id="hourly-icon" class="weather-icon" width="128" height="128"></canvas>
                 <div id="hourly-summary"></div>
@@ -59,14 +60,28 @@
                   </div>
                 </li> -->
               </ul>
-              
+
             </div>
           </li>
 
           <li id="daily-weather-tab" class="accordion-item" data-accordion-item>
             <a href="#" class="accordion-title">Daily Weather</a>
             <div id="daily-weather" class="accordion-content" data-tab-content>
-              
+
+              <div class="text-center">
+                <canvas id="daily-icon" class="weather-icon" width="128" height="128"></canvas>
+                <div id="daily-summary"></div>
+              </div>
+
+              <ul id="daily-weather-list" class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true">
+                <!-- <li id="daily-weather-tab" class="accordion-item is-active" data-accordion-item>
+                  <a href="#" class="accordion-title">Daily Weather</a>
+                  <div id="daily-weather" class="accordion-content" data-tab-content>
+                    
+                  </div>
+                </li> -->
+              </ul>
+
             </div>
           </li>
 
