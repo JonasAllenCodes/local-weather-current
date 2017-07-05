@@ -139,11 +139,18 @@ $(document).ready(function() {
 
 				function convertTime(UNIX_timestamp, format, formatTF = true){
 				  var timeStamp = new Date(UNIX_timestamp * 1000);
-				  var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul',
-				  	'Aug','Sep','Oct','Nov','Dec'];
+				  var months = [
+				  	'Jan','Feb','Mar','Apr','May','Jun','Jul',
+				  	'Aug','Sep','Oct','Nov','Dec'
+				  ];
+				  var weekDays = [
+				  	"Sunday", "Monday", "Tuesday", "Wednesday", "Thursday",
+				  	"Friday", "Saturday"
+					];
 				  var year = timeStamp.getFullYear();
 				  var month = months[timeStamp.getMonth()];
 				  var day = timeStamp.getDate();
+				  var weekDay = weekDays[timeStamp.getDay()];
 				  var hour = timeStamp.getHours();
 				  var min = timeStamp.getMinutes();
 				  min = min < 10 ? '0' + min : min;
@@ -187,6 +194,9 @@ $(document).ready(function() {
 				  				return hour;
 				  				break;
 				  		}
+				  		break;
+				  	case "weekDay":
+				  		return weekDay;
 				  		break;
 				  	default:
 				  		return full;
@@ -494,6 +504,118 @@ $(document).ready(function() {
 					}
 				}
 
+				function buildDaily() {
+					var dailyPosition = darksky.weather.daily
+					var dailyIndex = dailyPosition.data;
+
+					darksky.skycons.set("daily-icon", Skycons[dailyPosition.icon.toUpperCase().replace(/-/g, "_")]);
+					$("#daily-summary").html(dailyPosition.summary);
+
+					console.log(dailyIndex[0]);
+
+					for(var i = 0; dailyIndex.length > i; i++) {
+						var thisdayFormated = convertTime(dailyWeather("time", i), "weekDay");
+						var thisSummary = dailyWeather("summary", i);
+						var thisTemp = setTemp(dailyWeather, "temperature", i);
+						var thisWind = setWind(dailyWeather, i);
+						var thisFeelsLike = setTemp(dailyWeather, "apparentTemperature", i);
+						var thisPrecipType =
+							setPrecipType(dailyWeather, i).charAt(0).toUpperCase() +
+							setPrecipType(dailyWeather, i).slice(1);
+						var thisPrecipChance =
+							setPercent(dailyWeather, "precipProbability", i);
+						var thisPercipAmount = setPrecipAmount(dailyWeather, i);
+						var thisHumidity =
+							setPercent(dailyWeather, "humidity", i);
+						var thisDewPoint =
+							setTemp(dailyWeather, "dewPoint", i);
+						var thisVisibility = 
+							setVisibility(dailyWeather, i);
+						var thisPressure = 
+							setPressure(dailyWeather, i);
+
+						function setStat(title, stat) {
+							return '<li class="small-6 columns"><strong>' + title +
+								'</strong> <br><span id="current-wind">' + stat +
+								'</span></li>';
+						}
+
+						$("#daily-weather-list").append(
+							'<li id="day-' +  i +
+							'-weather" class="accordion-item day-weather" data-accordion-item></li>'
+						);
+						$("#day-" + i + "-weather").html(
+							'<a href="#" id="day-' + i +
+							'-title" class="accordion-title day-title text-center"></a>'
+						);
+						$("#day-" + i + "-title").append(
+							'<span class="float-left">' + thisdayFormated + '</span>'
+						);
+						$("#day-" + i + "-title").append(
+							'<span class="text-center"><canvas id="day-' + i +
+							'-icon" class="weather-icon daily-icon" width="20" height="20"></canvas> ' + thisSummary + '</span>'
+
+						);
+						setSkycon(
+							"day-"+i+"-icon", dailyWeather, i
+						);
+						$("#day-" + i + "-title").append(
+							'<span class="float-right">' + thisTemp + '</span>'
+						);
+						$("#day-" + i + "-weather").append(
+							'<div id="day-' + i +
+							'-content" class="accordion-content day-content" data-tab-content>' + 
+							'</div>'
+						);
+						$("#day-" + i + "-content").append('<ul id="day-' + i +
+							'-info" class="row day-info text-center"></ul>');
+						$("#day-" + i + "-info").append(setStat("Wind", thisWind));
+						$("#day-" + i + "-info").append(setStat(
+							"Feels Like", thisFeelsLike
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Chance of " + thisPrecipType, thisPrecipChance
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Amount of " + thisPrecipType, thisPercipAmount
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Humidity", thisHumidity
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Dew Pt", thisDewPoint
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Visibility", thisVisibility
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Pressure", thisPressure
+						));
+
+						$("#day-" + i + "-title").on("click", function() {
+							var dayTitle = $("#day-" + i + "-title");
+							var dayContent = dayTitle.siblings(
+								"#day-" + i + "-content"
+							);
+
+							function dayContentDisplay(prop) {
+								return dayContent.css("display", prop);
+							}
+
+							switch(dayContentDisplay) {
+								case "block":
+									dayContentDisplay("none");
+									break;
+								case "none":
+									dayContentDisplay("block");
+									break;
+							}
+						});
+
+						console.log();
+					}
+				}
+
 				displayWeather();
 
 				// Button Actions
@@ -586,6 +708,9 @@ $(document).ready(function() {
   				
   				// Hourly Weather
   				buildHourly();
+
+  				// Daily Weather
+  				buildDaily();
 				}
 			},
 			error: function(JSONerror) {
