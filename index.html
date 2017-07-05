@@ -41,13 +41,8 @@
         </div>
       </div>
       <div id="future-weather" class="medium-6 small-12 columns" data-equalizer-watch>
+
         <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true">
-          <!-- <li class="accordion-item is-active" data-accordion-item>
-            <a href="#" class="accordion-title">Weather Maps</a>
-            <div id="weather-maps" class="accordion-content" data-tab-content>
-              <script src='https://maps.darksky.net/@temperature,39.000,-95.000,4.js?embed=true&timeControl=true&fieldControl=true&defaultField=temperature&defaultUnits=_f'></script>
-            </div>
-          </li> -->
           <li id="hourly-weather-tab" class="accordion-item is-active" data-accordion-item>
             <a href="#" class="accordion-title">Hourly Weather</a>
             <div id="hourly-weather-content" class="accordion-content" data-tab-content>
@@ -55,6 +50,7 @@
                 <canvas id="hourly-icon" class="weather-icon" width="128" height="128"></canvas>
                 <div id="hourly-summary"></div>
               </div>
+
               <ul id="hourly-weather-list" class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true">
                 <!-- <li id="hourly-weather-tab" class="accordion-item is-active" data-accordion-item>
                   <a href="#" class="accordion-title">Hourly Weather</a>
@@ -63,15 +59,19 @@
                   </div>
                 </li> -->
               </ul>
+              
             </div>
           </li>
+
           <li id="daily-weather-tab" class="accordion-item" data-accordion-item>
             <a href="#" class="accordion-title">Daily Weather</a>
             <div id="daily-weather" class="accordion-content" data-tab-content>
               
             </div>
           </li>
+
         </ul>
+
       </div>
     </div>
 
