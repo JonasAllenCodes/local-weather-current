@@ -540,6 +540,10 @@ $(document).ready(function() {
 						var thisPressure = 
 							setPressure(dailyWeather, i);
 
+						if(i == 0) {
+							var thisdayFormated = "Today";
+						}
+
 						function setStat(title, stat) {
 							return '<li class="small-6 columns"><strong>' + title +
 								'</strong> <br><span id="current-wind">' + stat +
