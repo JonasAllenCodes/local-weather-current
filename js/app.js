@@ -539,6 +539,10 @@ $(document).ready(function() {
 							setVisibility(dailyWeather, i);
 						var thisPressure = 
 							setPressure(dailyWeather, i);
+						var thisSunrise  = convertTime(dailyWeather("sunriseTime", i), "time");
+						var thisSunset = convertTime(dailyWeather("sunsetTime", i), "time");
+
+						console.log(thisSunset);
 
 						if(i == 0) {
 							var thisdayFormated = "Today";
@@ -630,6 +634,12 @@ $(document).ready(function() {
 						));
 						$("#day-" + i + "-info").append(setStat(
 							"Pressure", thisPressure
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Sunrise", thisSunrise
+						));
+						$("#day-" + i + "-info").append(setStat(
+							"Sunset", thisSunset
 						));
 
 						$("#day-" + i + "-title").on("click", function() {
