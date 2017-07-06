@@ -1,9 +1,15 @@
 #content-container {
 
 }
-/*  .day-content {
+ .day-content {
 	display: block;
-}  */
+} 
+
+.uv-index {
+	color: #FFF;
+	padding: 0.3rem 0.6rem;
+	border-radius: 1rem;
+}
 
 #current-weather {
 	background-size:     cover;                      /* <------ */

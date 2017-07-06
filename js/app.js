@@ -332,15 +332,6 @@ $(document).ready(function() {
 					'<span class="celc-fahr">' + user.celcFahr + '</span>';
 				}
 
-				function setPrecipType (functionID, arrayID) {
-					if(typeof functionID("precipType", arrayID) !==
-							"undefined") {
-						return functionID("precipType", arrayID);
-					} else {
-						return "rain";
-					}
-				}
-
 				function setWind(functionID, arrayID) {
 					var speed = checkKmhMph(functionID("windSpeed", arrayID)) + " ";
 					var bearing = functionID("windBearing", arrayID) + "deg";
@@ -353,9 +344,40 @@ $(document).ready(function() {
 					return result;
 				}
 
+				function setUVIndex(functionID, arrayID) {
+					var uvIndex = functionID("uvIndex", arrayID);
+					var uvIndexSelector = $(".uv-index");
+
+					if (uvIndex >= 0 && uvIndex <= 2) {
+						uvIndexSelector.css("background-color", "#299501");
+					} if (uvIndex >= 3 && uvIndex <= 5) {
+						uvIndexSelector.css("background-color", "#F7E401");
+						uvIndexSelector.css("color", "#000");
+					} if (uvIndex >= 6 && uvIndex <= 7) {
+						uvIndexSelector.css("background-color", "#F95901");
+					} if (uvIndex >= 8 && uvIndex <= 10) {
+						uvIndexSelector.css("background-color", "#D90011");
+					} if (uvIndex >= 11) {
+						uvIndexSelector.css("background-color", "#6C49CB");
+					}
+
+					return '<span class="uv-index">' + uvIndex + '</span>';
+				}
+
+				console.log(setUVIndex(currentWeather));
+
 				function setPercent(functionID, propID, arrayID) {
 					return Math.round(functionID(propID, arrayID) * 100) +
 						"%";
+				}
+
+				function setPrecipType (functionID, arrayID) {
+					if(typeof functionID("precipType", arrayID) !==
+							"undefined") {
+						return functionID("precipType", arrayID);
+					} else {
+						return "rain";
+					}
 				}
 
 				function setPrecipAmount(functionID, arrayID) {
@@ -609,7 +631,7 @@ $(document).ready(function() {
 						);
 						$("#day-" + i + "-info").append(setStat("Wind", thisWind));
 						$("#day-" + i + "-info").append(setStat(
-							"UV Index", "Coming soon..."
+							"UV Index", setUVIndex(dailyWeather, i)
 						));
 						$("#day-" + i + "-info").append(setStat(
 							"Chance of " + thisPrecipType, thisPrecipChance
