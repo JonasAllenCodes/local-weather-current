@@ -516,9 +516,15 @@ $(document).ready(function() {
 					for(var i = 0; dailyIndex.length > i; i++) {
 						var thisdayFormated = convertTime(dailyWeather("time", i), "weekDay");
 						var thisSummary = dailyWeather("summary", i);
-						var thisTemp = setTemp(dailyWeather, "temperature", i);
+						var thisMinTemp = setTemp(dailyWeather, "temperatureMin", i);
+						var thisMinTempTime = convertTime(dailyWeather("temperatureMinTime", i), "time");
+						var thisMaxTemp = setTemp(dailyWeather, "temperatureMax", i);
+						var thisMaxTempTime = convertTime(dailyWeather("temperatureMaxTime", i), "time");
 						var thisWind = setWind(dailyWeather, i);
-						var thisFeelsLike = setTemp(dailyWeather, "apparentTemperature", i);
+						var thisFeelsLikeMin = setTemp(dailyWeather, "apparentTemperatureMin", i);
+						var thisFeelsLikeMinTime = convertTime(dailyWeather("apparentTemperatureMinTime", i), "time");
+						var thisFeelsLikeMax = setTemp(dailyWeather, "apparentTemperatureMax", i);
+						var thisFeelsLikeMaxTime = convertTime(dailyWeather("apparentTemperatureMaxTime", i), "time");
 						var thisPrecipType =
 							setPrecipType(dailyWeather, i).charAt(0).toUpperCase() +
 							setPrecipType(dailyWeather, i).slice(1);
@@ -560,7 +566,7 @@ $(document).ready(function() {
 							"day-"+i+"-icon", dailyWeather, i
 						);
 						$("#day-" + i + "-title").append(
-							'<span class="float-right">' + thisTemp + '</span>'
+							'<span class="float-right">' +  + '</span>'
 						);
 						$("#day-" + i + "-weather").append(
 							'<div id="day-' + i +
@@ -571,7 +577,7 @@ $(document).ready(function() {
 							'-info" class="row day-info text-center"></ul>');
 						$("#day-" + i + "-info").append(setStat("Wind", thisWind));
 						$("#day-" + i + "-info").append(setStat(
-							"Feels Like", thisFeelsLike
+							"Feels Like", 
 						));
 						$("#day-" + i + "-info").append(setStat(
 							"Chance of " + thisPrecipType, thisPrecipChance
