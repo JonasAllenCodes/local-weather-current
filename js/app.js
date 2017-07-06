@@ -517,9 +517,9 @@ $(document).ready(function() {
 						var thisdayFormated = convertTime(dailyWeather("time", i), "weekDay");
 						var thisSummary = dailyWeather("summary", i);
 						var thisMinTemp = setTemp(dailyWeather, "temperatureMin", i);
-						var thisMinTempTime = convertTime(dailyWeather("temperatureMinTime", i), "time");
+						var thisMinTempTime = convertTime(dailyWeather("temperatureMinTime", i), "hour");
 						var thisMaxTemp = setTemp(dailyWeather, "temperatureMax", i);
-						var thisMaxTempTime = convertTime(dailyWeather("temperatureMaxTime", i), "time");
+						var thisMaxTempTime = convertTime(dailyWeather("temperatureMaxTime", i), "hour");
 						var thisWind = setWind(dailyWeather, i);
 						var thisFeelsLikeMin = setTemp(dailyWeather, "apparentTemperatureMin", i);
 						var thisFeelsLikeMinTime = convertTime(dailyWeather("apparentTemperatureMinTime", i), "time");
@@ -555,19 +555,30 @@ $(document).ready(function() {
 							'-title" class="accordion-title day-title text-center"></a>'
 						);
 						$("#day-" + i + "-title").append(
-							'<span class="float-left">' + thisdayFormated + '</span>'
-						);
-						$("#day-" + i + "-title").append(
-							'<span class="text-center"><canvas id="day-' + i +
-							'-icon" class="weather-icon daily-icon" width="20" height="20"></canvas> ' + thisSummary + '</span>'
-
+							'<span class="float-left">' +
+							'<span class="text-center"><canvas id="day-' + i + '-icon" class="weather-icon daily-icon" width="20" height="20"></canvas></span>' +
+							thisdayFormated + '</span>'
 						);
 						setSkycon(
 							"day-"+i+"-icon", dailyWeather, i
 						);
+						$("#day-" + i + "-title").append("&nbsp;");
 						$("#day-" + i + "-title").append(
-							'<span class="float-right">' +  + '</span>'
+							'<span class="float-right"></span>'
 						);
+						$("#day-" + i + "-title .float-right").html(
+							'<span class="row day-' + i + '-low-temp"></span>'
+						);
+						$("#day-" + i + "-title .float-right .row").append(
+							'<span id="day-' + i +
+							'-low-temp" class="small-6 columns text-center day-low-temp"></span>'
+						);
+						$("#day-" + i + "-low-temp").append(thisMinTemp);
+						$("#day-" + i + "-title .float-right .row").append(
+							'<span id="day-' + i +
+							'-max-temp" class="small-6 columns text-center day-max-temp"></span>'
+						);
+						$("#day-" + i + "-max-temp").append(thisMaxTemp);
 						$("#day-" + i + "-weather").append(
 							'<div id="day-' + i +
 							'-content" class="accordion-content day-content" data-tab-content>' + 
@@ -575,9 +586,28 @@ $(document).ready(function() {
 						);
 						$("#day-" + i + "-content").append('<ul id="day-' + i +
 							'-info" class="row day-info text-center"></ul>');
+						$("#day-" + i + "-info").append('<span class="text-center"><canvas id="day-' + i +
+							'-content-icon" class="weather-icon daily-icon" width="60" height="60"></canvas></span><br>'
+						);
+						setSkycon(
+							"day-"+i+"-content-icon", dailyWeather, i
+						);
+						$("#day-" + i + "-info").append('<p>' + thisSummary + '</p>');
+						$("#day-" + i + "-info").append(
+							setStat("Low Temp",thisMinTemp)
+						);
+						$("#day-" + i + "-info").append(
+							setStat("Max Temp",thisMaxTemp)
+						);
+						$("#day-" + i + "-info").append(
+							setStat("Low Time",$.trim(thisMinTempTime))
+						);
+						$("#day-" + i + "-info").append(
+							setStat("Max Time",$.trim(thisMaxTempTime))
+						);
 						$("#day-" + i + "-info").append(setStat("Wind", thisWind));
 						$("#day-" + i + "-info").append(setStat(
-							"Feels Like", 
+							"UV Index", "Coming soon..."
 						));
 						$("#day-" + i + "-info").append(setStat(
 							"Chance of " + thisPrecipType, thisPrecipChance
