@@ -1,9 +1,9 @@
 #content-container {
 
 }
-/* .hour-content {
+/*  .day-content {
 	display: block;
-} */
+}  */
 
 #current-weather {
 	background-size:     cover;                      /* <------ */
@@ -61,30 +61,41 @@
 #current-weather #current-info .celc-fahr {
 	font-size: 0.7rem;
 }
-#hourly-summary {
+#hourly-summary,
+#daily-summary {
 	margin-bottom: 1rem;
 }
-.hour-title {
+.hour-title,
+.day-title {
 	font-weight: bolder;
 	font-size: 1.5rem;
 	color:black;
 }
 .hour-title:hover,
-.hour-title:focus {
+.hour-title:focus,
+.day-title:hover,
+.day-title:focus {
 	color: black;
 }
-.hour-title:before {
+.hour-title:before,
+.day-title:before {
 	display: none;
+}
+.day-title .daily-icon {
+	margin-right: 1rem;
 }
 .hour-title .text-center {
 	font-weight: normal;
 }
-.hour-title .float-right .celc-fahr {
+.hour-title .float-right .celc-fahr,
+.day-title .float-right .celc-fahr {
 	font-size: 0.8rem;
 }
-.hour-content ul li {
+.hour-content ul li,
+.day-content ul li {
 	list-style-type: none;
 }
-.hour-content .celc-fahr {
+.hour-content .celc-fahr,
+.day-content .celc-fahr {
 	font-size: 0.7rem;
 }
