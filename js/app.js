@@ -398,8 +398,6 @@ $(document).ready(function() {
 					darksky.skycons.set("hourly-icon", Skycons[hourlyPosition.icon.toUpperCase().replace(/-/g, "_")]);
 					$("#hourly-summary").html(hourlyPosition.summary);
 
-					console.log(hourlyIndex[0]);
-
 					for(var i = 0; hourlyIndex.length > i; i++) {
 						var thisHour = convertTime(hourlyWeather("time", i), "hour", false);
 						var thisHourFormated = convertTime(hourlyWeather("time", i), "hour");
@@ -511,8 +509,6 @@ $(document).ready(function() {
 					darksky.skycons.set("daily-icon", Skycons[dailyPosition.icon.toUpperCase().replace(/-/g, "_")]);
 					$("#daily-summary").html(dailyPosition.summary);
 
-					console.log(dailyIndex[0]);
-
 					for(var i = 0; dailyIndex.length > i; i++) {
 						var thisdayFormated = convertTime(dailyWeather("time", i), "weekDay");
 						var thisSummary = dailyWeather("summary", i);
@@ -541,8 +537,6 @@ $(document).ready(function() {
 							setPressure(dailyWeather, i);
 						var thisSunrise  = convertTime(dailyWeather("sunriseTime", i), "time");
 						var thisSunset = convertTime(dailyWeather("sunsetTime", i), "time");
-
-						console.log(thisSunset);
 
 						if(i == 0) {
 							var thisdayFormated = "Today";
