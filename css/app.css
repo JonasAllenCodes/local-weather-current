@@ -51,6 +51,7 @@
 }
 #current-weather #current-summary {
 	font-size: 1.5rem;
+	margin-bottom: 1.8rem;
 }
 #current-weather #impe-metr-switch {
 	margin: 1.5rem;
