@@ -71,7 +71,8 @@
 	margin-bottom: 1rem;
 }
 .hour-title,
-.day-title {
+.day-title,
+.future-title {
 	font-weight: bolder;
 	font-size: 1.5rem;
 	color:black;
@@ -79,18 +80,26 @@
 .hour-title:hover,
 .hour-title:focus,
 .day-title:hover,
-.day-title:focus {
+.day-title:focus,
+.future-title:hover,
+.future-title:focus {
 	color: black;
 }
-.hour-title:before,
+/* .hour-title:before,
 .day-title:before {
 	display: none;
-}
+} */
 .day-title .daily-icon {
 	margin-right: 1rem;
 }
 .hour-title .text-center {
 	font-weight: normal;
+}
+.hour-title .float-right {
+	margin-right: 2rem;
+}
+.day-title .float-right {
+	margin-right: 1rem;
 }
 .hour-title .float-right .celc-fahr,
 .day-title .float-right .celc-fahr {
