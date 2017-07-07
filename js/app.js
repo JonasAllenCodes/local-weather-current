@@ -346,26 +346,41 @@ $(document).ready(function() {
 
 				function setUVIndex(functionID, arrayID) {
 					var uvIndex = functionID("uvIndex", arrayID);
-					var uvIndexSelector = $(".uv-index");
-					var returnVal = '<span class="uv-index">' + uvIndex + '</span>'
+					var uvIndexID;
+
+					if(arrayID === undefined) {
+						uvIndexID = "uv-current-index";
+					} else {
+						if(functionID == hourlyWeather){
+							uvIndexID = "hour-" + arrayID + "-uv-index";
+						} else if(functionID == dailyWeather) {
+							uvIndexID = "day-" + arrayID + "-uv-index";
+						}
+					}
+
+					var uvIndexSelector = $("#" + uvIndexID);
 
 					if (uvIndex >= 0 && uvIndex <= 2) {
-						uvIndexSelector.css("background-color", "#299501");
+						uvIndexBackground =  "#299501";
+						uvIndexColor =  "#FFF";
 					}else if (uvIndex >= 3 && uvIndex <= 5) {
-						uvIndexSelector.css("background-color", "#F7E401");
-						uvIndexSelector.css("color", "#000");
+						uvIndexBackground =  "#F7E401";
+						uvIndexColor =  "#000";
 					}else if (uvIndex >= 6 && uvIndex <= 7) {
-						uvIndexSelector.css("background-color", "#F95901");
+						uvIndexBackground =  "#F95901";
+						uvIndexColor =  "#FFF";
 					}else if (uvIndex >= 8 && uvIndex <= 10) {
-						uvIndexSelector.css("background-color", "#D90011");
+						uvIndexBackground =  "#D90011";
+						uvIndexColor =  "#FFF";
 					}else if (uvIndex >= 11) {
-						uvIndexSelector.css("background-color", "#6C49CB");
+						uvIndexBackground =  "#6C49CB";
+						uvIndexColor =  "#FFF";
 					}
+
+					var returnVal = '<span id="' + uvIndexID + '" class="uv-index" style="background-color: ' + uvIndexBackground + '; color: ' + uvIndexColor + '">' + uvIndex + '</span>';
 
 					return returnVal;
 				}
-
-				console.log(setUVIndex(currentWeather));
 
 				function setPercent(functionID, propID, arrayID) {
 					return Math.round(functionID(propID, arrayID) * 100) +
