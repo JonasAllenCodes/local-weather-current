@@ -32,8 +32,9 @@ $(document).ready(function() {
 		var liHeight = 0;
     windowHeight = $(window).innerHeight();
     $('#current-weather').css('height', windowHeight);
-    $('#current-weather').css('max-height', windowHeight);
+    $('#current-weather').css('min-height', windowHeight);
     $("#future-weather").css("height", windowHeight);
+    $('#future-weather').css('min-height', windowHeight);
     $(".future-title").each(function(index) {
     	liHeight = liHeight + $(this).outerHeight();
     });
