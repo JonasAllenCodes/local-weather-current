@@ -347,21 +347,22 @@ $(document).ready(function() {
 				function setUVIndex(functionID, arrayID) {
 					var uvIndex = functionID("uvIndex", arrayID);
 					var uvIndexSelector = $(".uv-index");
+					var returnVal = '<span class="uv-index">' + uvIndex + '</span>'
 
 					if (uvIndex >= 0 && uvIndex <= 2) {
 						uvIndexSelector.css("background-color", "#299501");
-					} if (uvIndex >= 3 && uvIndex <= 5) {
+					}else if (uvIndex >= 3 && uvIndex <= 5) {
 						uvIndexSelector.css("background-color", "#F7E401");
 						uvIndexSelector.css("color", "#000");
-					} if (uvIndex >= 6 && uvIndex <= 7) {
+					}else if (uvIndex >= 6 && uvIndex <= 7) {
 						uvIndexSelector.css("background-color", "#F95901");
-					} if (uvIndex >= 8 && uvIndex <= 10) {
+					}else if (uvIndex >= 8 && uvIndex <= 10) {
 						uvIndexSelector.css("background-color", "#D90011");
-					} if (uvIndex >= 11) {
+					}else if (uvIndex >= 11) {
 						uvIndexSelector.css("background-color", "#6C49CB");
 					}
 
-					return '<span class="uv-index">' + uvIndex + '</span>';
+					return returnVal;
 				}
 
 				console.log(setUVIndex(currentWeather));
@@ -427,6 +428,10 @@ $(document).ready(function() {
 						var thisTemp = setTemp(hourlyWeather, "temperature", i);
 						var thisWind = setWind(hourlyWeather, i);
 						var thisFeelsLike = setTemp(hourlyWeather, "apparentTemperature", i);
+						var thisCloudCover = setPercent(
+							hourlyWeather, "cloudCover", i
+						);
+						thisUVIndex = setUVIndex(hourlyWeather, i);
 						var thisPrecipType =
 							setPrecipType(hourlyWeather, i).charAt(0).toUpperCase() +
 							setPrecipType(hourlyWeather, i).slice(1);
@@ -480,6 +485,12 @@ $(document).ready(function() {
 						$("#hour-" + i + "-info").append(setStat("Wind", thisWind));
 						$("#hour-" + i + "-info").append(setStat(
 							"Feels Like", thisFeelsLike
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"Cloud Cover", thisCloudCover
+						));
+						$("#hour-" + i + "-info").append(setStat(
+							"UV Index", thisUVIndex
 						));
 						$("#hour-" + i + "-info").append(setStat(
 							"Chance of " + thisPrecipType, thisPrecipChance
@@ -727,7 +738,6 @@ $(document).ready(function() {
 
   				//Current Weather
   				setBackground(currentWeather("icon"), $("#current-weather"));
-  				//$("#current-weather").css("background-image", 'url("../extras/images/clear_day/clear-day-full.jpg")');
   				setSkycon("current-icon", currentWeather);
   				$("#current-temp").html(
   					setTemp(currentWeather, "temperature")
@@ -737,6 +747,12 @@ $(document).ready(function() {
   				$("#current-wind").html(setWind(currentWeather));
   				$("#current-feels-like").html(
   					setTemp(currentWeather, "apparentTemperature")
+  				);
+  				$("#current-cloud-cover").html(
+  					setPercent(currentWeather, "cloudCover")
+  				);
+  				$("#current-uv-index").html(
+  					setUVIndex(currentWeather)
   				);
   				$(".current-precip-type").html(
 						setPrecipType(currentWeather).charAt(0).toUpperCase() +
