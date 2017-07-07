@@ -809,7 +809,7 @@ $(document).ready(function() {
   				// Daily Weather
   				buildDaily();
 
-  				$("#hourly-weather-list").foundation();
+  				Foundation.reInit('accordion');
 
 				}
 			},
