@@ -808,6 +808,9 @@ $(document).ready(function() {
 
   				// Daily Weather
   				buildDaily();
+
+  				$("#hourly-weather-list").foundation();
+
 				}
 			},
 			error: function(JSONerror) {
