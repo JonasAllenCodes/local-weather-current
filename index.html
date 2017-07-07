@@ -44,10 +44,10 @@
       </div>
       <div id="future-weather" class="medium-6 small-12 columns" data-equalizer-watch>
 
-        <ul class="accordion" data-accordion data-multi-expand="true" data-allow-all-closed="true" data-deep-link="true">
-          <li id="hourly-weather-tab" class="accordion-item" data-accordion-item>
+        <ul id="future-accordion" class="accordion" data-accordion data-multi-expand="false" data-allow-all-closed="true" data-deep-link="true">
+          <li id="hourly-weather-tab" class="accordion-item future-item" data-accordion-item>
             <a href="#" class="accordion-title future-title">Hourly Weather</a>
-            <div id="hourly-weather-content" class="accordion-content" data-tab-content>
+            <div id="hourly-weather-content" class="accordion-content future-content" data-tab-content>
 
               <div class="text-center">
                 <canvas id="hourly-icon" class="weather-icon" width="128" height="128"></canvas>
@@ -66,9 +66,9 @@
             </div>
           </li>
 
-          <li id="daily-weather-tab" class="accordion-item" data-accordion-item>
+          <li id="daily-weather-tab" class="accordion-item future-item" data-accordion-item>
             <a href="#" class="accordion-title future-title">Daily Weather</a>
-            <div id="daily-weather" class="accordion-content" data-tab-content>
+            <div id="daily-weather" class="accordion-content future-content" data-tab-content>
 
               <div class="text-center">
                 <canvas id="daily-icon" class="weather-icon" width="128" height="128"></canvas>

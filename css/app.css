@@ -66,6 +66,18 @@
 #current-weather #current-info .celc-fahr {
 	font-size: 0.7rem;
 }
+#future-weather {
+	background-color: #212641;
+}
+
+#future-weather .accordion-content {
+	background-color: #212641;
+	border-color: #A6B3BF;
+	color: #F0F2F2;
+}
+#future-accordion {
+	margin-bottom: 0rem;
+}
 #hourly-summary,
 #daily-summary {
 	margin-bottom: 1rem;
@@ -75,7 +87,9 @@
 .future-title {
 	font-weight: bolder;
 	font-size: 1.5rem;
-	color:black;
+	background-color: #F0F2F2;
+	border-color: #A6B3BF;
+	color: #212641;
 }
 .hour-title:hover,
 .hour-title:focus,
@@ -83,7 +97,8 @@
 .day-title:focus,
 .future-title:hover,
 .future-title:focus {
-	color: black;
+	background-color: #A6B3BF;
+	color: #212641;
 }
 /* .hour-title:before,
 .day-title:before {

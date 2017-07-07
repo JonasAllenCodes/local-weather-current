@@ -15,20 +15,34 @@ var user = {
 var darksky = {
 	weather: {},
 	skycons: new Skycons({
-		"color": "black",
+		"color": "#F0F2F2",
 		"resizeClear": true
 	})
 };
 var googleMap = {};
 var errorMsg = $("#error");
 var succMsg = $("#succ-msg");
+var mainColor = "#F0F2F2"
+var secondaryColor = "#"
 
 $(document).ready(function() {
 
 	// Set current weather to height of window
 	function setCurrentHeight() {
+		var liHeight = 0;
     windowHeight = $(window).innerHeight();
+    $('#current-weather').css('height', windowHeight);
     $('#current-weather').css('max-height', windowHeight);
+    $("#future-weather").css("height", windowHeight);
+    $(".future-title").each(function(index) {
+    	liHeight = liHeight + $(this).outerHeight();
+    });
+    $(".future-content")
+    	.outerHeight(windowHeight - liHeight)
+    	.css("min-height", windowHeight - liHeight)
+    	.css("overflow", "auto");
+
+    console.log(liHeight);
   };
   setCurrentHeight();
   
@@ -256,59 +270,69 @@ $(document).ready(function() {
 
 				function setBackground(weather, objectDOM) {
 					var backgroundIMG;
+					var backgroundIMGadd;
 					var container = $("#current-weather-container");
 
 					switch(weather) {
 						case "clear-day":
 							backgroundIMG = 'url("img/clear-day-large.jpg")';
+							backgroundIMGadd = "img/clear-day-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							break;
 						case "clear-night":
 							backgroundIMG = 'url("img/clear-night-large.jpg")';
+							backgroundIMGadd = "img/clear-night-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.65)");
 							break;
 						case "rain":
 							backgroundIMG = 'url("img/rain-day-large.jpg")';
+							backgroundIMGadd = "img/rain-day-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.7)");
 							break;
 						case "snow":
 							backgroundIMG = 'url("img/snow-day-large.jpg")';
+							backgroundIMGadd = "img/snow-day-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.85)");
 							break;
 						case "sleet":
 							backgroundIMG = 'url("img/sleet-large.jpg")';
+							backgroundIMGadd = "img/sleet-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							break;
 						case "wind":
 							backgroundIMG = 'url("img/wind-large-1.jpg")';
+							backgroundIMGadd = "img/wind-large-1.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.85)");
 							break;
 						case "fog":
 							backgroundIMG = 'url("img/fog-day-large.jpg")';
+							backgroundIMGadd = "img/fog-day-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.5)");
 							break;
 						case "cloudy":
 							backgroundIMG = 'url("img/cloudy-large.jpg")';
+							backgroundIMGadd = "img/cloudy-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.5)");
 							break;
 						case "partly-cloudy-day":
 							backgroundIMG = 'url("img/partly-cloudy-day-large.jpg")';
+							backgroundIMGadd = "img/partly-cloudy-night-large.jpg";
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.8)");
 							break;
 						case "partly-cloudy-night":
 							backgroundIMG = 'url("img/partly-cloudy-night-large-1.jpg")';
+							backgroundIMGadd = "img/partly-cloudy-night-large-1.jpg";
 							//objectDOM.css("background-position", "bottom right");
 							objectDOM.css("background-image", backgroundIMG);
 							container.css("background-color", "rgba(255,255,255,0.4)");
 							break;
-
 
 					}
 
@@ -321,8 +345,11 @@ $(document).ready(function() {
 				}
 
 				// Sets needed icon to referenced icon
-				function setSkycon(canvasID, functionID, arrayID) {
-					var skycons = darksky.skycons;
+				function setSkycon(canvasID, functionID, arrayID, color) {
+					var skycons = new Skycons({
+						"color": color,
+						"resizeClear": true
+					})
 
 					skycons.set(canvasID, Skycons[functionID("icon", arrayID).toUpperCase().replace(/-/g, "_")]);
 				}
@@ -485,7 +512,7 @@ $(document).ready(function() {
 
 						);
 						setSkycon(
-							"hour-"+i+"-icon", hourlyWeather, i
+							"hour-"+i+"-icon", hourlyWeather, i, "#212641"
 						);
 						$("#hour-" + i + "-title").append(
 							'<span class="float-right">' + thisTemp + '</span>'
@@ -640,7 +667,7 @@ $(document).ready(function() {
 							'-content-icon" class="weather-icon daily-icon" width="60" height="60"></canvas></span><br>'
 						);
 						setSkycon(
-							"day-"+i+"-content-icon", dailyWeather, i
+							"day-"+i+"-content-icon", dailyWeather, i, "#F0F2F2"
 						);
 						$("#day-" + i + "-info").append('<p>' + thisSummary + '</p>');
 						$("#day-" + i + "-info").append(
